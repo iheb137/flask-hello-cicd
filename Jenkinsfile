@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/iheb137/flask-hello-cicd.git', credentialsId: 'github-app-credentials'
+                git url: 'https://github.com/iheb137/flask-hello-cicd.git', credentialsId: 'github-credentials'
             }
         }
         stage('Build Docker Image') {
@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python3 -m pytest' // Ajustez selon vos tests, ex: 'pytest tests/'
+                sh 'python3 -m pytest' // Ajustez selon vos tests
             }
         }
         stage('Push to Docker Hub') {
@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Notify Jira') {
             when {
-                expression { return false } // Désactivé pour l'instant, à activer avec un credential Jira plus tard
+                expression { return false } // Désactivé pour l'instant
             }
             steps {
                 echo 'Jira notification to be implemented'
@@ -54,7 +54,6 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            // Ajoutez ici des commandes de nettoyage si nécessaire
         }
     }
 }
