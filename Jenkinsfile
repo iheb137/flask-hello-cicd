@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/iheb137/flask-hello-cicd.git', credentialsId: 'github-credentials'
+                git url: 'https://github.com/iheb137/flask-hello-cicd.git', credentialsId: 'github-credentials', branch: 'main'
             }
         }
         stage('Build Docker Image') {
